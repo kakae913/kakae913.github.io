@@ -1,0 +1,29 @@
+{% assign category_posts = site.categories[include.category_name] %}
+{% assign all_tags = site.tags | sort %}
+{% assign found_tags = 0 %}
+
+<div class="category-accordion-panel">
+  <div class="category-tag-list">
+    {% for tag_item in all_tags %}
+      {% assign tag_is_in_category = false %}
+      {% for tagged_post in tag_item[1] %}
+        {% if tagged_post.categories contains include.category_name %}
+          {% assign tag_is_in_category = true %}
+        {% endif %}
+      {% endfor %}
+      {% if tag_is_in_category %}
+        {% assign found_tags = found_tags | plus: 1 %}
+        {% assign tag_slug = tag_item[0] | slugify | url_encode %}
+        <a class="category-tag" href="{{ '/tags/' | append: tag_slug | append: '/' | relative_url }}">{{ tag_item[0] }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if found_tags == 0 %}
+      <span class="category-tag-empty">게시글에 태그를 추가하면 이곳에 표시됩니다.</span>
+    {% endif %}
+  </div>
+
+  {% if category_posts and category_posts.size > 0 %}
+    <a class="category-all-posts" href="{{ include.topic_url | relative_url }}">이 카테고리 글 모두 보기 →</a>
+  {% endif %}
+</div>

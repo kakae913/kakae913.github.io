@@ -1,0 +1,78 @@
+---
+layout: default
+---
+
+{% assign visible_posts = site.posts | where_exp: 'post', 'post.hidden != true' %}
+
+<section class="home-feed" id="home-feed">
+  <header class="home-feed-heading">
+    <span class="home-feed-marker" aria-hidden="true">$</span>
+    <h1 data-feed-title>전체 글</h1>
+    <span class="home-feed-count" data-feed-count>{{ visible_posts.size }}</span>
+  </header>
+
+  <div class="home-post-list">
+    {% for post in visible_posts %}
+      {% assign post_categories = post.categories | join: '|' %}
+      <article class="home-post-card" data-categories="{{ post_categories | escape }}">
+        <div class="home-post-copy">
+          <a class="home-post-title" href="{{ post.url | relative_url }}">
+            <i class="fas fa-code" aria-hidden="true"></i>
+            <h2>{{ post.title }}</h2>
+          </a>
+
+          <p class="home-post-excerpt">{% include post-summary.html %}</p>
+
+          <div class="home-post-meta">
+            <div class="home-post-categories">
+              {% for category in post.categories %}
+                <a class="home-post-category" href="{{ '/' | relative_url }}?category={{ category | url_encode }}">{{ category }}</a>
+              {% endfor %}
+            </div>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time>
+          </div>
+        </div>
+
+        {% if post.image %}
+          {% assign preview_image = post.image.path | default: post.image %}
+          {% unless preview_image contains '://' %}
+            {% assign preview_image = preview_image | relative_url %}
+          {% endunless %}
+          <a class="home-post-image" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
+            <img src="{{ preview_image }}" alt="">
+          </a>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+
+  <p class="home-feed-empty" hidden>선택한 카테고리에 아직 게시글이 없습니다.</p>
+</section>
+
+<script>
+  (() => {
+    const feed = document.getElementById('home-feed');
+    if (!feed) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const selectedCategory = params.get('category');
+    const cards = [...feed.querySelectorAll('.home-post-card')];
+    const title = feed.querySelector('[data-feed-title]');
+    const count = feed.querySelector('[data-feed-count]');
+    const empty = feed.querySelector('.home-feed-empty');
+
+    if (!selectedCategory) return;
+
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const categories = (card.dataset.categories || '').split('|').filter(Boolean);
+      const matches = categories.includes(selectedCategory);
+      card.hidden = !matches;
+      if (matches) visibleCount += 1;
+    });
+
+    title.textContent = selectedCategory;
+    count.textContent = visibleCount;
+    empty.hidden = visibleCount !== 0;
+  })();
+</script>

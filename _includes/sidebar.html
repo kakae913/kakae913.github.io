@@ -1,0 +1,203 @@
+<!-- The Side Bar -->
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end" data-turbo-permanent>
+  <header class="profile-wrapper">
+    <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle">
+      {%- if site.avatar != empty and site.avatar -%}
+        {%- capture avatar_url -%}
+          {% include media-url.html src=site.avatar %}
+        {%- endcapture -%}
+        <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+      {%- endif -%}
+    </a>
+    <a class="site-title d-block" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
+  </header>
+  <!-- .profile-wrapper -->
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item{% if page.layout == 'home' %} active{% endif %}">
+        <a href="{{ '/' | relative_url }}" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>{{ site.data.locales[include.lang].tabs.home | upcase }}</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      {% for tab in site.tabs %}
+        {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+        {% assign category_active = false %}
+        {% if tab.url == '/categories/' or tab.url == '/categories' %}
+          {% if page.url == tab.url or page.url contains '/topics/' %}
+            {% assign category_active = true %}
+          {% endif %}
+        {% endif %}
+
+        {% if tab.url == '/categories/' or tab.url == '/categories' %}
+          <li class="nav-item category-nav-item{% if category_active %} active{% endif %}">
+            <details class="sidebar-category-details"{% if category_active %} open{% endif %}>
+              <summary class="nav-link{% if category_active %} active{% endif %}">
+                <i class="fa-fw {{ tab.icon }}"></i>
+                <span class="category-nav-label">{{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
+                <i class="fas fa-chevron-down category-nav-chevron" aria-hidden="true"></i>
+              </summary>
+              <ul class="category-subnav">
+                <li>
+                  <a class="category-subnav-link{% if page.layout == 'home' %} active{% endif %}" href="{{ '/' | relative_url }}">전체</a>
+                </li>
+                <li><a class="category-subnav-link" href="{{ '/' | relative_url }}?category={{ '개발' | url_encode }}">개발</a></li>
+                <li><a class="category-subnav-link" href="{{ '/' | relative_url }}?category={{ 'CTF/Wargame' | url_encode }}">CTF/Wargame</a></li>
+                <li><a class="category-subnav-link" href="{{ '/' | relative_url }}?category={{ 'Bug Bounty' | url_encode }}">Bug Bounty</a></li>
+                <li><a class="category-subnav-link" href="{{ '/' | relative_url }}?category={{ '블로그/기술문서' | url_encode }}">블로그/기술문서</a></li>
+                <li><a class="category-subnav-link" href="{{ '/' | relative_url }}?category={{ '논문/컨퍼런스' | url_encode }}">논문/컨퍼런스</a></li>
+                <li><a class="category-subnav-link" href="{{ '/' | relative_url }}?category={{ '공모전/자격증' | url_encode }}">공모전/자격증</a></li>
+              </ul>
+            </details>
+          </li>
+        {% else %}
+          <li class="nav-item{% if tab.url == page.url %} active{% endif %}">
+            <a href="{{ tab.url | relative_url }}" class="nav-link">
+              <i class="fa-fw {{ tab.icon }}"></i>
+              <span>{{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+
+  {% include music-player.html %}
+
+  <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
+    {% for entry in site.data.contact %}
+      {% case entry.type %}
+        {% when 'github' %}
+          <a href="https://github.com/kakae913-cmd" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+            <i class="{{ entry.icon }}"></i>
+          </a>
+        {% when 'linkedin' %}
+          <a href="{{ entry.url }}" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <i class="{{ entry.icon }}"></i>
+          </a>
+        {% when 'discord' %}
+          <a href="{{ entry.url }}" aria-label="Discord" target="_blank" rel="noopener noreferrer">
+            <i class="{{ entry.icon }}"></i>
+          </a>
+        {% when 'email' %}
+          <button type="button" class="email-copy-button" data-email="kakae913@gmal.com" aria-label="이메일 주소 복사">
+            <i class="{{ entry.icon }}"></i>
+          </button>
+      {% endcase %}
+    {% endfor %}
+    <span id="copy-notice" class="copy-notice" role="status" aria-live="polite" aria-hidden="true"></span>
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+<script defer src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.23/dist/turbo.es2017-umd.js"></script>
+
+<script>
+  (() => {
+    const normalizePageChrome = () => {
+      document.title = document.title.replace(/\s+\|\s+/g, ' · ');
+      document.head.querySelectorAll(
+        'link[rel~="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"], link[rel="manifest"]'
+      ).forEach((link) => link.remove());
+
+      const sidebar = document.getElementById('sidebar');
+      if (!sidebar) return;
+
+      const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+      const categoryNav = sidebar.querySelector('.sidebar-category-details');
+      const selectedCategory = new URLSearchParams(window.location.search).get('category');
+      sidebar.querySelectorAll('.nav-item').forEach((item) => item.classList.remove('active'));
+      sidebar.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
+      sidebar.querySelectorAll('.category-subnav-link').forEach((link) => link.classList.remove('active'));
+
+      const categoryPage = pathname === '/categories' || pathname.startsWith('/topics/');
+      const categoryNavActive = categoryPage || Boolean(selectedCategory);
+      if (categoryNav) categoryNav.open = categoryNavActive;
+
+      if (categoryNavActive) {
+        categoryNav.closest('.nav-item').classList.add('active');
+        categoryNav.querySelector('summary').classList.add('active');
+      }
+
+      const activeLink = [...sidebar.querySelectorAll('.nav-link[href], .category-subnav-link[href]')].find((link) => {
+        const target = new URL(link.href, window.location.href);
+        return target.pathname.replace(/\/+$/, '') === pathname.replace(/\/+$/, '') &&
+          (selectedCategory ? target.searchParams.get('category') === selectedCategory : !target.searchParams.has('category'));
+      });
+
+      if (activeLink) {
+        activeLink.classList.add('active');
+        activeLink.closest('.nav-item')?.classList.add('active');
+      }
+    };
+
+    if (!window.__kakaeTurboHooksInstalled) {
+      window.__kakaeTurboHooksInstalled = true;
+
+      document.addEventListener('turbo:before-render', (event) => {
+        const incomingBody = event.detail.newBody;
+        const currentTopbar = document.getElementById('topbar-wrapper');
+        const incomingTopbar = incomingBody.querySelector('#topbar-wrapper');
+
+        if (currentTopbar && incomingTopbar) {
+          const currentBreadcrumb = currentTopbar.querySelector('#breadcrumb');
+          const incomingBreadcrumb = incomingTopbar.querySelector('#breadcrumb');
+          const currentTitle = currentTopbar.querySelector('#topbar-title');
+          const incomingTitle = incomingTopbar.querySelector('#topbar-title');
+
+          if (currentBreadcrumb && incomingBreadcrumb) currentBreadcrumb.innerHTML = incomingBreadcrumb.innerHTML;
+          if (currentTitle && incomingTitle) currentTitle.innerHTML = incomingTitle.innerHTML;
+          incomingTopbar.replaceWith(currentTopbar);
+        }
+
+        ['#back-to-top', '#mask', '#search-results'].forEach((selector) => {
+          const currentElement = document.querySelector(selector);
+          const incomingElement = incomingBody.querySelector(selector);
+          if (currentElement && incomingElement) {
+            if (selector === '#search-results') currentElement.replaceChildren();
+            incomingElement.replaceWith(currentElement);
+          }
+        });
+      });
+
+      document.addEventListener('turbo:load', normalizePageChrome);
+      document.addEventListener('DOMContentLoaded', normalizePageChrome, { once: true });
+    }
+
+    const copyButton = document.querySelector('.email-copy-button');
+    const notice = document.getElementById('copy-notice');
+    if (!copyButton || !notice || copyButton.dataset.copyBound === 'true') return;
+    copyButton.dataset.copyBound = 'true';
+
+    let hideNoticeTimer;
+    copyButton.addEventListener('click', async () => {
+      const email = copyButton.dataset.email;
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch (error) {
+        const helper = document.createElement('textarea');
+        helper.value = email;
+        helper.setAttribute('readonly', '');
+        helper.style.position = 'fixed';
+        helper.style.opacity = '0';
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand('copy');
+        helper.remove();
+      }
+
+      notice.textContent = `${email} 복사됨`;
+      notice.classList.add('is-visible');
+      notice.setAttribute('aria-hidden', 'false');
+      window.clearTimeout(hideNoticeTimer);
+      hideNoticeTimer = window.setTimeout(() => {
+        notice.classList.remove('is-visible');
+        notice.setAttribute('aria-hidden', 'true');
+      }, 2200);
+    });
+  })();
+</script>
