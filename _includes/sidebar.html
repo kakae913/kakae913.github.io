@@ -71,7 +71,7 @@
     {% for entry in site.data.contact %}
       {% case entry.type %}
         {% when 'github' %}
-          <a href="https://github.com/kakae913-cmd" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/kakae913" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
             <i class="{{ entry.icon }}"></i>
           </a>
         {% when 'linkedin' %}
@@ -108,13 +108,16 @@
       if (!sidebar) return;
 
       const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+      const basePath = {{ site.baseurl | jsonify }};
+      const routePath = basePath && (pathname === basePath || pathname.startsWith(`${basePath}/`))
+        ? (pathname.slice(basePath.length) || '/') : pathname;
       const categoryNav = sidebar.querySelector('.sidebar-category-details');
       const selectedCategory = new URLSearchParams(window.location.search).get('category');
       sidebar.querySelectorAll('.nav-item').forEach((item) => item.classList.remove('active'));
       sidebar.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
       sidebar.querySelectorAll('.category-subnav-link').forEach((link) => link.classList.remove('active'));
 
-      const categoryPage = pathname === '/categories' || pathname.startsWith('/topics/');
+      const categoryPage = routePath === '/categories' || routePath.startsWith('/topics/');
       const categoryNavActive = categoryPage || Boolean(selectedCategory);
       if (categoryNav) categoryNav.open = categoryNavActive;
 

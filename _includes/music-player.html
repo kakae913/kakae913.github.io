@@ -1,5 +1,5 @@
 {% assign music = site.music_player %}
-<section class="sidebar-music-player" aria-label="음악 플레이어" data-music-player data-audio-src="{{ music.src | escape }}">
+<section class="sidebar-music-player" aria-label="음악 플레이어" data-music-player data-audio-src="{{ music.src | relative_url | escape }}">
   <div class="music-player-artwork">
     <img src="{{ '/assets/img/music-player-paper.png' | relative_url }}" alt="" draggable="false">
     <span class="music-artwork-heart" aria-hidden="true"><i class="far fa-heart"></i></span>

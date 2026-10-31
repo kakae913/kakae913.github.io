@@ -12,7 +12,7 @@ order: 4
     <h1>kakae913</h1>
     <p class="about-lead">보안과 개발을 공부하며, 직접 부딪힌 문제와 배운 내용을 기록합니다.</p>
     <nav class="about-links" aria-label="외부 링크">
-      <a href="https://github.com/kakae913-cmd" aria-label="GitHub" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+      <a href="https://github.com/kakae913" aria-label="GitHub" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
       <a href="https://www.linkedin.com/in/%EC%9A%B0%EC%A7%84-%EC%A0%95-a90269319/" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
       <a href="https://discord.com/users/215982005777727499" aria-label="Discord" title="Discord" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord" aria-hidden="true"></i></a>
       <a href="mailto:kakae913@gmal.com" aria-label="이메일" title="이메일"><i class="fas fa-envelope" aria-hidden="true"></i></a>
