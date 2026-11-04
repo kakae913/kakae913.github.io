@@ -747,6 +747,7 @@ footer a {
 }
 
 .home-post-card {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -757,6 +758,19 @@ footer a {
   border-radius: 12px;
   background: rgba(24, 15, 13, 0.9);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+}
+
+.home-post-title::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border-radius: 12px;
+  content: '';
+}
+
+.home-post-title:focus-visible::after {
+  outline: 2px solid #e28a55;
+  outline-offset: 3px;
 }
 
 .home-post-card[hidden],
@@ -826,6 +840,8 @@ footer a {
 }
 
 .home-post-category {
+  position: relative;
+  z-index: 2;
   padding: 0.12rem 0.45rem;
   border-radius: 5px;
   background: rgba(105, 63, 43, 0.48);
