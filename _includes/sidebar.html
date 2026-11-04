@@ -94,6 +94,15 @@
 </aside>
 <!-- #sidebar -->
 
+<header class="mobile-site-header" aria-label="모바일 메뉴">
+  <button type="button" class="mobile-menu-toggle" aria-label="메뉴 열기" aria-controls="sidebar" aria-expanded="false">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+  <a class="mobile-site-name" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <span class="mobile-header-spacer" aria-hidden="true"></span>
+</header>
+<button type="button" class="mobile-menu-overlay" aria-label="메뉴 닫기" tabindex="-1"></button>
+
 <script defer src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.23/dist/turbo.es2017-umd.js"></script>
 
 <script>
@@ -141,7 +150,39 @@
     if (!window.__kakaeTurboHooksInstalled) {
       window.__kakaeTurboHooksInstalled = true;
 
+      const mobileLayout = window.matchMedia('(max-width: 849.98px)');
+      const setMobileMenu = (open, restoreFocus = false) => {
+        const isOpen = Boolean(open && mobileLayout.matches);
+        const sidebar = document.getElementById('sidebar');
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        document.body.classList.toggle('mobile-menu-open', isOpen);
+        if (sidebar) sidebar.inert = mobileLayout.matches && !isOpen;
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', String(isOpen));
+          toggle.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+          if (restoreFocus) toggle.focus();
+        }
+        if (isOpen && sidebar) sidebar.querySelector('a.nav-link')?.focus({ preventScroll: true });
+      };
+
+      setMobileMenu(false);
+      mobileLayout.addEventListener('change', () => setMobileMenu(false));
+      document.addEventListener('click', (event) => {
+        if (!(event.target instanceof Element)) return;
+        if (event.target.closest('.mobile-menu-toggle')) {
+          setMobileMenu(!document.body.classList.contains('mobile-menu-open'));
+        } else if (event.target.closest('.mobile-menu-overlay')) {
+          setMobileMenu(false, true);
+        } else if (document.body.classList.contains('mobile-menu-open') && event.target.closest('#sidebar a')) {
+          setMobileMenu(false);
+        }
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && document.body.classList.contains('mobile-menu-open')) setMobileMenu(false, true);
+      });
+
       document.addEventListener('turbo:before-render', (event) => {
+        setMobileMenu(false);
         const incomingBody = event.detail.newBody;
         const currentTopbar = document.getElementById('topbar-wrapper');
         const incomingTopbar = incomingBody.querySelector('#topbar-wrapper');
