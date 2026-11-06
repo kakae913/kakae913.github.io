@@ -479,6 +479,45 @@ footer a {
   display: none !important;
 }
 
+#related-posts > h3 {
+  color: #eadbd2;
+}
+
+#related-posts .post-preview {
+  border: 1px solid rgba(226, 145, 91, 0.3);
+  border-radius: 10px;
+  background: rgba(23, 17, 15, 0.96);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+  color: #eadbd2;
+  text-decoration: none;
+}
+
+#related-posts .post-preview::before {
+  display: none;
+}
+
+#related-posts .post-preview time {
+  color: #c1a99a;
+}
+
+#related-posts .post-preview h4 {
+  color: #f4e7de;
+}
+
+#related-posts .post-preview .text-muted {
+  color: #d0bdb0 !important;
+}
+
+#related-posts .post-preview:hover {
+  border-color: rgba(240, 163, 111, 0.75);
+  background: #302019;
+}
+
+#related-posts .post-preview:focus-visible {
+  outline: 2px solid #e28a55;
+  outline-offset: 3px;
+}
+
 #main-wrapper .post-navigation {
   display: flex !important;
   gap: 0.85rem;
