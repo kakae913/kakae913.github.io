@@ -466,7 +466,7 @@ footer a {
 }
 
 /* Give long-form posts a solid reading surface over the photo background. */
-#main-wrapper main article[data-toc='true'] {
+#main-wrapper main article:has(> header .post-meta) {
   padding: 1.5rem !important;
   border: 1px solid rgba(226, 145, 91, 0.22);
   border-radius: 12px;
@@ -1294,7 +1294,7 @@ footer a {
     padding-left: 1rem;
   }
 
-  #main-wrapper main article[data-toc='true'] {
+  #main-wrapper main article:has(> header .post-meta) {
     padding: 1.1rem !important;
   }
 
