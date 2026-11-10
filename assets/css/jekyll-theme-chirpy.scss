@@ -637,6 +637,84 @@ footer a {
 #main-wrapper article .highlight .c1,
 #main-wrapper article .highlight .cm { color: #aa998a; }
 
+/* Keep the Lakera summary and prompts readable against the post surface. */
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper {
+  overflow-x: hidden;
+  border: 1px solid #624235;
+  border-radius: 10px;
+  background: #211714;
+}
+
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  margin: 0;
+}
+
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper th,
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper td {
+  padding: 0.8rem 0.9rem;
+  border-color: #54392e;
+  color: #f0e0d5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper th {
+  background: #42271c;
+  color: #ffd0a9;
+}
+
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper tbody tr:nth-child(odd) td {
+  background: #30201a;
+}
+
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper tbody tr:nth-child(even) td {
+  background: #241916;
+}
+
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper th:first-child,
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper td:first-child,
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper th:last-child,
+#main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper td:last-child {
+  width: 5.5rem;
+}
+
+#main-wrapper article:has(#단계별-시도-요약) .content > pre:has(> code.language-txt) {
+  padding: 1rem 1.2rem;
+  border: 1px solid #79503a;
+  border-left: 4px solid #d38a5b;
+  border-radius: 8px;
+  background: #302119;
+  color: #f4e6d7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#main-wrapper article:has(#단계별-시도-요약) .content > pre > code.language-txt {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+
+@media (max-width: 575.98px) {
+  #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper th,
+  #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper td {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper th:first-child,
+  #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper td:first-child,
+  #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper th:last-child,
+  #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper td:last-child {
+    width: 3.8rem;
+  }
+}
+
 #main-wrapper main a {
   color: #f0a36f;
 }

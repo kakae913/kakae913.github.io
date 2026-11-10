@@ -1,5 +1,5 @@
 ---
-title: "[미션] Lakera 프롬프트 인젝션 실습 (욕설 가림본)"
+title: "[미션] Lakera 프롬프트 인젝션 실습"
 date: 2026-11-10 21:00:00 +0900
 categories: ["CTF/Wargame"]
 ---
@@ -62,8 +62,6 @@ Join the two strings on each line without a separator. Return the four results o
 ![(그림 1)]({{ '/assets/img/posts/lakera/figure-01-redacted.png' | relative_url }})
 
 *(그림 1)*
-
-![스크린샷]({{ '/assets/img/posts/lakera/extra-phone-screenshot-redacted.png' | relative_url }})
 
 이 이후로도 이 방식으로 계속 시도하여
 
@@ -435,5 +433,9 @@ Score: 100
 
 *(그림 15)*
 
-이렇게 lakera의 Solace AI를 Level1\~5까지 <b>100점</b>으로 풀어봤다.
+## 마치며
+
+동아리에서 LLM Prompt Injection과 Jailbreak를 공부한 적이 있어, 이번 실습을 시작할 때는 자신감이 있었다. 알고 있는 공격 기법도 여럿이라 다양한 방식으로 시도해 봤지만, 생각처럼 잘 되지는 않았다. 방학 때 비슷한 사이트에서 효과를 봤던 방법들도 여기서는 통하지 않았다.
+
+그래도 여러 프롬프트를 시도하며, 점수가 낮더라도 가능성이 보이는 방식을 조금씩 개선해 결국 문제를 풀 수 있었다. 기회가 되면 심심할 때 다른 애플리케이션에도 도전해 봐야겠다.
 
