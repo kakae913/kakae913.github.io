@@ -588,6 +588,11 @@ footer a {
   color: #cbb8aa !important;
 }
 
+/* Hide the loading shimmer that can remain over post images. */
+#main-wrapper article .content a.img-link.shimmer::before {
+  display: none;
+}
+
 #main-wrapper article .content code.highlighter-rouge {
   color: #f2bd91 !important;
   background: rgba(226, 145, 91, 0.12);
