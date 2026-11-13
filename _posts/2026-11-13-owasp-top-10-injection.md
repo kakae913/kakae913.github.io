@@ -39,9 +39,9 @@ OWASP Top 10은 웹사이트나 웹 서비스에서 특히 주의해야 할 보�
 ## 참고자료
 
 1. [A05 Injection - OWASP Top 10:2025](https://top10.owasp.org/2025/A05_2025-Injection/)
-2. [SQL 삽입 | SQL 삽입이란? | Cloudflare](https://www.cloudflare.com/ko-kr/learning/security/threats/sql-injection/)
-3. [Cross-Site Scripting (XSS) | Learn | Dreamhack](https://dreamhack.io/lecture/units/webhacking-xss)
-4. [SQL Injection | Learn | Dreamhack](https://dreamhack.io/lecture/units/webhacking-sql-injection)
+2. [SQL 삽입이란? - Cloudflare](https://www.cloudflare.com/ko-kr/learning/security/threats/sql-injection/)
+3. [Cross-Site Scripting XSS - Dreamhack](https://dreamhack.io/lecture/units/webhacking-xss)
+4. [SQL Injection - Dreamhack](https://dreamhack.io/lecture/units/webhacking-sql-injection)
 5. [SQL Injection Prevention - OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
 6. [Cross Site Scripting Prevention - OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
 
