@@ -1,6 +1,6 @@
 ---
 title: "[미션] OWASP Top 10 보안 동향 분석"
-date: 2026-11-13 21:00:00 +0900
+date: 2026-11-13 00:00:00 +0900
 categories: ["블로그/기술문서"]
 description: "OWASP Top 10의 Injection을 공부하며 SQL Injection과 XSS를 정리했다."
 ---
