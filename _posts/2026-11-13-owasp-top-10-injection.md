@@ -45,7 +45,7 @@ OWASP Top 10은 웹사이트나 웹 서비스에서 특히 주의해야 할 보�
 5. [SQL Injection Prevention - OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
 6. [Cross Site Scripting Prevention - OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
 
-공부 순서는 Injection이 뭔지에 대해 공부해보고 드림핵을 통해 대표적인 Injection 공격(Sql injection, XSS)을 공부하고 문제를 풀어본다. 그 뒤 Sql injection과 XSS 방어기법을 공부해봤다.
+공부 순서는 Injection이 뭔지에 대해 공부해보고 드림핵을 통해 대표적인 Injection 공격(Sql injection, XSS)을 공부하고 문제를 풀어본다. 그 뒤 Sql injection과 XSS 예방법을 공부해봤다.
 
 ## 1. Injection이 무엇인가
 
@@ -137,7 +137,7 @@ Reflected XSS는 DOM-based XSS랑 비슷하다. 둘 다 조작된 입력이 브�
 
 Universal XSS는 웹사이트의 입력값 처리 실수로 생기는 일반 XSS랑 다르다. 브라우저 자체나 브라우저 확장 프로그램의 취약점을 이용해, 원래는 접근할 수 없어야 하는 사이트의 정보에 접근하거나 코드를 실행하는 공격이다. 일반 XSS가 특정 웹사이트의 문제라면, Universal XSS는 브라우저의 보안 문제라고 볼 수 있다.
 
-## 4. 입력값이 명령으로 실행되지 않게 하려면
+## 4. Injection 예방법
 
 사용자의 입력값이 명령어로 실행되지 않도록 해야 한다.
 
