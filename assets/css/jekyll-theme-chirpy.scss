@@ -651,8 +651,8 @@ footer a {
 }
 
 #main-wrapper article .content > .table-wrapper table {
-  width: 100%;
-  min-width: 100%;
+  width: 100% !important;
+  min-width: 100% !important;
   margin: 0;
   table-layout: fixed;
   color: #eadbd2;
