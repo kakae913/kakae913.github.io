@@ -657,6 +657,59 @@ footer a {
   margin: 0;
 }
 
+/* Match the IDS/IPS comparison table to the site's warm dark palette. */
+#main-wrapper article .content table.ids-ips-table {
+  width: 100%;
+  margin: 1.5rem 0 2rem;
+  border: 1px solid #634332;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #211714;
+  color: #f0e0d5;
+}
+
+#main-wrapper article .content table.ids-ips-table th,
+#main-wrapper article .content table.ids-ips-table td {
+  padding: 0.85rem 1rem;
+  border: 0;
+  border-bottom: 1px solid rgba(226, 145, 91, 0.22);
+  color: #eadbd2;
+  background: #2b1c17;
+  vertical-align: top;
+}
+
+#main-wrapper article .content table.ids-ips-table thead th {
+  background: #472b1e;
+  color: #ffd0a9;
+  font-weight: 700;
+}
+
+#main-wrapper article .content table.ids-ips-table tbody tr:nth-child(even) th,
+#main-wrapper article .content table.ids-ips-table tbody tr:nth-child(even) td {
+  background: #241916;
+}
+
+#main-wrapper article .content table.ids-ips-table tbody th {
+  color: #f0b084;
+  font-weight: 600;
+}
+
+#main-wrapper article .content table.ids-ips-table tr:last-child th,
+#main-wrapper article .content table.ids-ips-table tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (max-width: 575.98px) {
+  #main-wrapper article .content table.ids-ips-table th,
+  #main-wrapper article .content table.ids-ips-table td {
+    padding: 0.65rem 0.55rem;
+    font-size: 0.84rem;
+    overflow-wrap: anywhere;
+  }
+}
+
 #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper th,
 #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper td {
   padding: 0.8rem 0.9rem;
