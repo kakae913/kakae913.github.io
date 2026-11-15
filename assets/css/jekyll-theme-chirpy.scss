@@ -642,6 +642,36 @@ footer a {
 #main-wrapper article .highlight .c1,
 #main-wrapper article .highlight .cm { color: #aa998a; }
 
+/* Use the site's warm dark palette for Markdown tables in posts. */
+#main-wrapper article .content > .table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #634332;
+  border-radius: 10px;
+  background: #211714;
+}
+
+#main-wrapper article .content > .table-wrapper table {
+  margin: 0;
+  color: #eadbd2;
+}
+
+#main-wrapper article .content > .table-wrapper th,
+#main-wrapper article .content > .table-wrapper td {
+  padding: 0.75rem 0.85rem;
+  border-color: rgba(226, 145, 91, 0.22);
+  color: #eadbd2;
+  background: #2b1c17;
+}
+
+#main-wrapper article .content > .table-wrapper thead th {
+  color: #ffd0a9;
+  background: #472b1e;
+}
+
+#main-wrapper article .content > .table-wrapper tbody tr:nth-child(even) td {
+  background: #241916;
+}
+
 /* Keep the Lakera summary and prompts readable against the post surface. */
 #main-wrapper article:has(#단계별-시도-요약) .content > .table-wrapper {
   overflow-x: hidden;
